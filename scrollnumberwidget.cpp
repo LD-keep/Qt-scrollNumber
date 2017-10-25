@@ -9,6 +9,7 @@
 ScrollNumberWidget::ScrollNumberWidget(QWidget *parent)
     : QWidget(parent)
 {   
+    setObjectName("ScrollNumberWidget");
     m_iMaxValue = 0;
     m_iMinValue = 0;
     m_iIndex = 0;
@@ -238,6 +239,7 @@ void ScrollNumberWidget::updateLabelAttributes(int start, int num, int value,
 
         pLbItem->move(QPoint(0, pos.y() + offset*ItemHeight));
         pLbItem->setText(QString::number(calculateValue(value, valOffset)));
+        pLbItem->raise();
         ++offset;
         ++valOffset;
     }
@@ -335,4 +337,6 @@ void ScrollNumberWidget::reviseCalculatePos()
             pLbItem->setStyleSheet(m_strNormal);
         }
     }
+
+    emit valueChange(m_listLabel.at(m_iIndex)->text().toInt());
 }

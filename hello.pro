@@ -3,7 +3,9 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 SOURCES += \
     main.cpp \
-    scrollnumberwidget.cpp
+    scrollnumberwidget.cpp \
+    datetimeselectwidget.cpp
 
 HEADERS += \
-    scrollnumberwidget.h
+    scrollnumberwidget.h \
+    datetimeselectwidget.h

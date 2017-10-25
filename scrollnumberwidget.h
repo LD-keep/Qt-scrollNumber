@@ -29,6 +29,9 @@ public:
     void setScrollNumberStyle(QString strNormal, QString strSelect);
     void setSelectRectStyle(QString strStyle);
 
+signals:
+    void valueChange(int value);
+
 protected:
     void mousePressEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event);

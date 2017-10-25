@@ -2,15 +2,17 @@
 #include <QApplication>
 #include <QCalendarWidget>
 
-#include "scrollnumberwidget.h"
+#include "datetimeselectwidget.h"
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    ScrollNumberWidget widget;
-    widget.setFixedSize(80, 170);
-    widget.setRange(1, 31);
+    DateTimeSelectWidget widget;
+    widget.setObjectName("DateTimeSelectWidget");
+    widget.setAttribute(Qt::WA_StyledBackground);
+    widget.setFixedSize(300, 170);
+    widget.setStyleSheet("QWidget#DateTimeSelectWidget{border-image: url(D:/workspace/project/testqml/resource/image/50a2fdff45d7a.png)}");
     widget.show();
 
     app.exec();
