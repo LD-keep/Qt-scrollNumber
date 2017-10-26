@@ -151,14 +151,20 @@ void ScrollNumberWidget::moveLabel(QPoint pos)
         pLbItem = m_listLabel.at(i);
         y = pLbItem->pos().y() + directionPos.y();
         pLbItem->move(0, y);
+//        qDebug() << "-------- item pos --- >" << pLbItem->pos();
     }
+
+//    qDebug() << "--- start end pos ---"
+//             << m_listLabel.at(m_iIndex)->pos() <<  m_iIndex << m_listLabel.at(m_iIndex)->text().toInt();;
+
+    refreshScrollNumberStyle();
 
     if (directionFlag)
     {
         pLbItem = m_listLabel.at(0);
         if (pLbItem->pos().y() > 0)
         {
-            showLabel(m_listLabel.at(2)->text().toInt(), pLbItem->pos());
+            showLabel(m_listLabel.at(m_iIndex)->text().toInt(), pLbItem->pos());
         }
     }
     else
@@ -166,11 +172,9 @@ void ScrollNumberWidget::moveLabel(QPoint pos)
         pLbItem = m_listLabel.at(VisibleLabelNum-1);
         if (pLbItem->pos().y() + pLbItem->height() - height() < 0)
         {
-            showLabel(m_listLabel.at(VisibleLabelNum-2-1)->text().toInt(), pLbItem->pos());
+            showLabel(m_listLabel.at(m_iIndex)->text().toInt(), pLbItem->pos());
         }
     }
-
-    refreshScrollNumberStyle();
 }
 
 void ScrollNumberWidget::showLabel(int value, QPoint pos)
@@ -236,6 +240,7 @@ void ScrollNumberWidget::updateLabelAttributes(int start, int num, int value,
 {
     int size = start + num;
     QLabel *pLbItem = NULL;
+    QString text;
     for (int i = start; i < size; ++i)
     {
         pLbItem = m_listLabel.at(i);
@@ -245,7 +250,12 @@ void ScrollNumberWidget::updateLabelAttributes(int start, int num, int value,
         }
 
         pLbItem->move(QPoint(0, pos.y() + offset*ItemHeight));
-        pLbItem->setText(QString::number(calculateValue(value, valOffset)));
+        text = QString::number(calculateValue(value, valOffset));
+        if (1 == text.size())
+        {
+            text.insert(0, "0");
+        }
+        pLbItem->setText(text);
         pLbItem->raise();
         ++offset;
         ++valOffset;
@@ -258,10 +268,14 @@ int ScrollNumberWidget::calculateValue(int indexVal, int offset)
     if (0 == value)
     {
         value = m_iMaxValue;
+        if (0 == m_iMinValue)
+        {
+            value = m_iMinValue;
+        }
     }
     else if (value < 0)
     {
-        value = value + m_iMaxValue;
+        value = value + m_iMaxValue + 1;
     }
     else if (value > m_iMaxValue)
     {
@@ -277,7 +291,6 @@ int ScrollNumberWidget::calculateValue(int indexVal, int offset)
 
 void ScrollNumberWidget::refreshScrollNumberStyle()
 {
-    m_mapInterRect.clear();
     int size = m_listLabel.size();
     QLabel *pLbItem = NULL;
     QSize rectSize(ItemWidth, ItemHeight);
@@ -295,6 +308,7 @@ void ScrollNumberWidget::refreshScrollNumberStyle()
                     || regionRect.contains(0, pLbItem->pos().y() + fontMet.height() + ItemFontSpacing))
             {
                 m_mapInterRect.insert(i, interRect.height());
+                m_iIndex = i;
                 pLbItem->setStyleSheet(m_strSelect);
             }
             else
@@ -305,6 +319,10 @@ void ScrollNumberWidget::refreshScrollNumberStyle()
         else
         {
             pLbItem->setStyleSheet(m_strNormal);
+            if (m_mapInterRect.find(i) != m_mapInterRect.end())
+            {
+                m_mapInterRect.remove(i);
+            }
         }
     }
 }
@@ -349,5 +367,6 @@ void ScrollNumberWidget::reviseCalculatePos()
         }
     }
 
+    m_mapInterRect.clear();
     emit valueChange(m_listLabel.at(m_iIndex)->text().toInt());
 }

@@ -12,21 +12,21 @@ DateTimeSelectWidget::DateTimeSelectWidget(QWidget *parent)
 void DateTimeSelectWidget::initUI()
 {
     m_pScrollNumFirtst = new ScrollNumberWidget(this);
-    m_pScrollNumFirtst->setRange(1900, 2100, 2017);
-    m_pScrollNumFirtst->setRegionText("year");
+    m_pScrollNumFirtst->setRange(0, 23);
+    m_pScrollNumFirtst->setRegionText("hour");
 
-    m_pScrollNumSecond = new ScrollNumberWidget(this);
-    m_pScrollNumSecond->setRange(1, 12, 10);
-    m_pScrollNumSecond->setRegionText("mon");
+//    m_pScrollNumSecond = new ScrollNumberWidget(this);
+//    m_pScrollNumSecond->setRange(0, 59);
+//    m_pScrollNumSecond->setRegionText("min");
 
-    m_pScrollNumThird = new ScrollNumberWidget(this);
-    m_pScrollNumThird->setRange(1, 31, 26);
-    m_pScrollNumThird->setRegionText("day");
+//    m_pScrollNumThird = new ScrollNumberWidget(this);
+//    m_pScrollNumThird->setRange(0, 59);
+//    m_pScrollNumThird->setRegionText("sec");
 
     m_pHMainLayout = new QHBoxLayout(this);
     m_pHMainLayout->addWidget(m_pScrollNumFirtst);
-    m_pHMainLayout->addWidget(m_pScrollNumSecond);
-    m_pHMainLayout->addWidget(m_pScrollNumThird);
+//    m_pHMainLayout->addWidget(m_pScrollNumSecond);
+//    m_pHMainLayout->addWidget(m_pScrollNumThird);
 
     setLayout(m_pHMainLayout);
 }
