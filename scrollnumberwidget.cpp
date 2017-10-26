@@ -28,9 +28,14 @@ ScrollNumberWidget::~ScrollNumberWidget()
 
 void ScrollNumberWidget::setRange(int min, int max)
 {
+    setRange(min, max, min);
+}
+
+void ScrollNumberWidget::setRange(int min, int max, int initValue)
+{
     m_iMaxValue = max;
     m_iMinValue = min;
-    m_iIndex = min + 2;
+    m_iIndex = initValue + 1;
 
     showLabel(m_iIndex, QPoint(0, 0));
 }
@@ -89,6 +94,8 @@ void ScrollNumberWidget::showEvent(QShowEvent *event)
         m_pLbSelectRegion->setFixedSize(width(), ItemHeight);
         m_pLbSelectRegion->move(0, (height() - ItemHeight)/2);
         m_pLbSelectRegion->show();
+        refreshScrollNumberStyle();
+        reviseCalculatePos();
     }
 }
 

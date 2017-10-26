@@ -24,6 +24,7 @@ public:
     QString value();
 
     void setRange(int min, int max);
+    void setRange(int min, int max, int initValue);
 
     void setRegionText(QString text);
     void setScrollNumberStyle(QString strNormal, QString strSelect);
