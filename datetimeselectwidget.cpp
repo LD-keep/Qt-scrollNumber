@@ -15,18 +15,18 @@ void DateTimeSelectWidget::initUI()
     m_pScrollNumFirtst->setRange(0, 23);
     m_pScrollNumFirtst->setRegionText("hour");
 
-//    m_pScrollNumSecond = new ScrollNumberWidget(this);
-//    m_pScrollNumSecond->setRange(0, 59);
-//    m_pScrollNumSecond->setRegionText("min");
+    m_pScrollNumSecond = new ScrollNumberWidget(this);
+    m_pScrollNumSecond->setRange(0, 59);
+    m_pScrollNumSecond->setRegionText("min");
 
-//    m_pScrollNumThird = new ScrollNumberWidget(this);
-//    m_pScrollNumThird->setRange(0, 59);
-//    m_pScrollNumThird->setRegionText("sec");
+    m_pScrollNumThird = new ScrollNumberWidget(this);
+    m_pScrollNumThird->setRange(0, 59);
+    m_pScrollNumThird->setRegionText("sec");
 
     m_pHMainLayout = new QHBoxLayout(this);
     m_pHMainLayout->addWidget(m_pScrollNumFirtst);
-//    m_pHMainLayout->addWidget(m_pScrollNumSecond);
-//    m_pHMainLayout->addWidget(m_pScrollNumThird);
+    m_pHMainLayout->addWidget(m_pScrollNumSecond);
+    m_pHMainLayout->addWidget(m_pScrollNumThird);
 
     setLayout(m_pHMainLayout);
 }
