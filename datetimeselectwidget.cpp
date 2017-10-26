@@ -12,7 +12,7 @@ DateTimeSelectWidget::DateTimeSelectWidget(QWidget *parent)
 void DateTimeSelectWidget::initUI()
 {
     m_pScrollNumFirtst = new ScrollNumberWidget(this);
-    m_pScrollNumFirtst->setRange(2000, 2100);
+    m_pScrollNumFirtst->setRange(1900, 2100);
     m_pScrollNumFirtst->setRegionText("year");
 
     m_pScrollNumSecond = new ScrollNumberWidget(this);

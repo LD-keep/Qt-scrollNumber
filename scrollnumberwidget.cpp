@@ -258,7 +258,11 @@ int ScrollNumberWidget::calculateValue(int indexVal, int offset)
     }
     else if (value > m_iMaxValue)
     {
-        value = value - m_iMaxValue;
+        value = value - m_iMaxValue + m_iMinValue - 1;
+    }
+    else if (value < m_iMinValue)
+    {
+        value = m_iMaxValue + (offset + (indexVal - m_iMinValue)) + 1;
     }
 
     return value;
