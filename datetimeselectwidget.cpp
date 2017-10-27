@@ -12,7 +12,7 @@ DateTimeSelectWidget::DateTimeSelectWidget(QWidget *parent)
 void DateTimeSelectWidget::initUI()
 {
     m_pScrollNumFirtst = new ScrollNumberWidget(this);
-    m_pScrollNumFirtst->setRange(0, 23);
+    m_pScrollNumFirtst->setRange(1, 23, 9);
     m_pScrollNumFirtst->setRegionText("hour");
 
     m_pScrollNumSecond = new ScrollNumberWidget(this);

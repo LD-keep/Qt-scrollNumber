@@ -35,7 +35,7 @@ void ScrollNumberWidget::setRange(int min, int max, int initValue)
 {
     m_iMaxValue = max;
     m_iMinValue = min;
-    m_iIndex = initValue + 1;
+    m_iIndex = initValue;
 
     showLabel(m_iIndex, QPoint(0, 0));
 }
@@ -157,8 +157,6 @@ void ScrollNumberWidget::moveLabel(QPoint pos)
 //    qDebug() << "--- start end pos ---"
 //             << m_listLabel.at(m_iIndex)->pos() <<  m_iIndex << m_listLabel.at(m_iIndex)->text().toInt();;
 
-    refreshScrollNumberStyle();
-
     if (directionFlag)
     {
         pLbItem = m_listLabel.at(0);
@@ -175,6 +173,8 @@ void ScrollNumberWidget::moveLabel(QPoint pos)
             showLabel(m_listLabel.at(m_iIndex)->text().toInt(), pLbItem->pos());
         }
     }
+
+    refreshScrollNumberStyle();
 }
 
 void ScrollNumberWidget::showLabel(int value, QPoint pos)
@@ -301,9 +301,9 @@ void ScrollNumberWidget::refreshScrollNumberStyle()
         pLbItem = m_listLabel.at(i);
         QRect itemRect(pLbItem->pos(), rectSize);
         QRect interRect = regionRect.intersected(itemRect);
-//        qDebug() << "---- rect ---" << i << regionRect << itemRect << interRect << fontMet.height();
         if (interRect.y() > 0)
         {
+            qDebug() << "---- rect ---" << i << interRect << pLbItem->text();
             if (regionRect.contains(0, pLbItem->pos().y() + ItemFontSpacing)
                     || regionRect.contains(0, pLbItem->pos().y() + fontMet.height() + ItemFontSpacing))
             {
