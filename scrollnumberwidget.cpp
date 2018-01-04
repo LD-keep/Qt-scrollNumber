@@ -162,7 +162,7 @@ void ScrollNumberWidget::moveLabel(QPoint pos)
         pLbItem = m_listLabel.at(0);
         if (pLbItem->pos().y() > 0)
         {
-            showLabel(m_listLabel.at(m_iIndex)->text().toInt(), pLbItem->pos());
+            showLabel(pLbItem->text().toInt(), pLbItem->pos());
         }
     }
     else
@@ -170,7 +170,7 @@ void ScrollNumberWidget::moveLabel(QPoint pos)
         pLbItem = m_listLabel.at(VisibleLabelNum-1);
         if (pLbItem->pos().y() + pLbItem->height() - height() < 0)
         {
-            showLabel(m_listLabel.at(m_iIndex)->text().toInt(), pLbItem->pos());
+            showLabel(pLbItem->text().toInt(), pLbItem->pos());
         }
     }
 
